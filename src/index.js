@@ -13,14 +13,15 @@ dotenv.config({
 
 connectdb()
 .then(()=>{
-    app.listen(process.env.PORT,()=>{
+    app.listen(process.env.PORT || 3000,()=>{
         console.log("app is listening on port :",process.env.PORT);
     })
 }).catch((err)=>{
     console.log("error occured in connecting db",err);
 })
 
-
+import userrouter from "./routes/user.routes.js"
+app.use("/api/user",userrouter)
 
 
 /*

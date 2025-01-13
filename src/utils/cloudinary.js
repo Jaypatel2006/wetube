@@ -5,7 +5,7 @@ import fs from "fs"
 cloudinary.config({ 
     cloud_name: 'daolco0ze', 
     api_key: '923574576552995', 
-    api_secret: process.env.api_secret
+    api_secret: process.env.apisecret
 });
 
 const uploncldn = async(filepath)=>{
@@ -14,10 +14,12 @@ const uploncldn = async(filepath)=>{
         const response = await cloudinary.uploader.upload(filepath,{
             resource_type:"auto"
         })
-        console.log("file upoloaded on cloudinary : ",response.url)
-        return response
+        
+        return response;
         
     } catch (error) {
+        console.log(error);
         fs.unlinkSync(filepath);
     }
 }
+export {uploncldn}

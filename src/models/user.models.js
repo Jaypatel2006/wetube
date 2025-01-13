@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-
+import {Video} from "./video.models.js"
 
 const userschema = new mongoose.Schema({
     username:{
@@ -43,9 +43,9 @@ const userschema = new mongoose.Schema({
 },{timestamps:true})
 
 userschema.pre("save",async function(){
-    if(!this.isModofied("password")) return next();
+    if(!this.isModified("password")) return;
     this.password = bcrypt.hash(this.password,10)
-    next()
+    return;
 })
 
 userschema.methods.ispasscorrect = async function(pass){
